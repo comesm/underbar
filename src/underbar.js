@@ -111,6 +111,26 @@
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
+    let results =[];
+
+    var negateTest = function(testToBeNegated)
+    {
+      let resultFunction = function(input)
+      {
+          if (testToBeNegated(input) === true)
+          {
+              return false;
+          }
+          else
+          {
+              return true;
+          }
+      }
+      return resultFunction;
+    }
+
+    results = _.filter(collection, negateTest(test));
+    return results;
   };
 
   // Produce a duplicate-free version of the array.
