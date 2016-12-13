@@ -135,6 +135,15 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+    var resultsArray = [];
+    var obj = {};
+    for (let i = 0; i < array.length; i++) {
+      obj[array[i]] = array[i]; 
+    }
+    for(let key in obj) {
+      resultsArray.push(obj[key]);
+    }
+    return resultsArray;
   };
 
 
