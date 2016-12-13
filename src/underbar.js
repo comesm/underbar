@@ -236,8 +236,25 @@
 
 
   // Determine whether all of the elements match a truth test.
-  _.every = function(collection, iterator) {
+  _.every = function(collection, truthTest) {
     // TIP: Try re-using reduce() here.
+    let castToBoolean = function(input)
+    {
+      return !!input;
+    }
+
+    if (collection.length === 0)
+    {
+      return true;
+    }
+
+    let doubleTruthTest = function(accumulator, inputToBeTested)
+    {
+      return (!!truthTest(accumulator) && !!truthTest(inputToBeTested));
+    };
+
+    let result = _.reduce(collection, doubleTruthTest);
+    return castToBoolean(result);
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
