@@ -198,6 +198,7 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
+    
     let startLoopIndex = 0;
     if(accumulator === undefined) {
        accumulator = collection[0];
@@ -208,8 +209,15 @@
       for (let i = startLoopIndex; i < collection.length; i++) {
          accumulator = iterator(accumulator, collection[i]);
       }
-
+    } 
+    else if (typeof collection === 'object')
+    {
+      for (let key in collection)
+      {
+        accumulator = iterator(accumulator, collection[key]);
+      }
     }
+
 
     return accumulator;
   };
